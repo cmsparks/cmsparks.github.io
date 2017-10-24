@@ -5,4 +5,4 @@ function httpGet(theUrl)
     xmlHttp.send( null );
     return xmlHttp.responseText;
 }
-console.log(httpGet("http://www.ctabustracker.com/bustime/api/v2/gettime?key=tZWNpjTrjnM5rMh8xLpeM8X95"))
+console.log(httpGet("https://www.ctabustracker.com/bustime/api/v2/gettime?key=tZWNpjTrjnM5rMh8xLpeM8X95"))

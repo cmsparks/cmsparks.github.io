@@ -35,11 +35,12 @@ class InfoBoxes extends React.Component {
     render () {
         return (
             <div className="content">
-                <InfoBox line="84 Bus" stop="Catalpa" time1="3:02"/>
-                <InfoBox line="Brown Line" stop="Kimball" time1="3:03"/>
-                <InfoBox line="Blue Line" stop="Midway" time1="3:15"/>
-                <InfoBox line="92 Bus" stop="Montrose" time1="3:05"/>
-                <InfoBox line="Brown Line" stop="Montrose" time1="2:59"/>
+              <div className="contentGrad"></div>
+              <InfoBox line="84 Bus" stop="Catalpa" time1="3:02"/>
+              <InfoBox line="Brown Line" stop="Kimball" time1="3:03"/>
+              <InfoBox line="Blue Line" stop="Midway" time1="3:15"/>
+              <InfoBox line="92 Bus" stop="Montrose" time1="3:05"/>
+              <InfoBox line="Brown Line" stop="Montrose" time1="2:59"/>
             </div>
         )
     }
@@ -49,7 +50,7 @@ function InfoBox(props) {
     return (
     <div className="infoBox">
         <h4>{props.line} {props.stop}</h4>
-        <div className="favorite">Favorite</div>
+        <div className="favorite"></div>
         <p>Next Arrival: <span style={{color: 'green', fontWeight: 'bold'}}>{props.time1}</span></p>
     </div>
     )

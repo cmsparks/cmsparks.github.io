@@ -1,13 +1,9 @@
 import React from 'react'
-import { withGoogleMap, GoogleMap, Marker, InfoWindow, } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker, InfoWindow, KmlLayer } from 'react-google-maps'
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleOpen = this.toggleOpen.bind(this);
-  }
-  toggleOpen(i) {
-    console.log("Marker: ", i);
   }
   
   render () {
@@ -20,7 +16,7 @@ class Map extends React.Component {
       }
       // ADD BTWN MARKER: {this.state.isOpen && <InfoWindow position={{lat:stopLoc.location.lat,lng:stopLoc.location.lng}} />}
       return (
-        <Marker key={i} {...marker} onClick={this.toggleOpen(i)}>
+        <Marker key={i} {...marker}>
         </Marker>
       )
     })
@@ -29,11 +25,15 @@ class Map extends React.Component {
       	<GoogleMap
       		//ref={this.mapLoaded.bind(this)}
           //onDragEnd={this.mapMoved.bind(this)}
-          defaultZoom={3}
+          defaultZoom={10}
       		//TODO insert location for the loop
-      		defaultCenter={{lat:25,lng:121}}
+      		defaultCenter={{lat:41.8633925,lng:-87.7121565}}
       		options={{streetViewControl:false, mapTypeControl:false}}
       	>
+          <KmlLayer
+      url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
+      options={{ preserveViewport: true }}
+    />
           { markers }
       	</GoogleMap>
     )

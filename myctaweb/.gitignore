@@ -58,4 +58,3 @@ typings/
 .env
 
 # webpack build
-bundle.js

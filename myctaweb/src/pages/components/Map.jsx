@@ -35,6 +35,7 @@ class Map extends React.Component {
       url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
       options={{ preserveViewport: true }}
     />
+          <KmlLayer url='./doc.kml' options={{ preserveViewport: true }} />
           { markers }
       	</GoogleMap>
     )

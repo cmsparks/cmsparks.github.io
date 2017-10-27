@@ -26,7 +26,7 @@ var trainMark = ""
 for (var i = 30000; i < 30500; i++) {
 	if(train_stops[i]!=undefined)
 	{
-		
+
 		//set up markers
 		trainMark=trainMark+'{"location": {'
 		trainMark=trainMark+'"lat": '+JSON.stringify(train_stops[i].latlng.latitude);
@@ -74,11 +74,6 @@ ReactDOM.render(
 	<App />,
 	document.getElementById('app')
 )
-
-
-
-
-
 
 
 

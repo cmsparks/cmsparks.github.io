@@ -12,7 +12,8 @@ class Map extends React.Component {
         position: {
           lat: stopLoc.location.lat,
           lng: stopLoc.location.lng
-        }
+        },
+        icon: stopLoc.icon
       }
       // ADD BTWN MARKER: {this.state.isOpen && <InfoWindow position={{lat:stopLoc.location.lat,lng:stopLoc.location.lng}} />}
       return (

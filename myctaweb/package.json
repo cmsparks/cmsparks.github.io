@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "test": "node app.js & webpack-dev-server --inline --hot --config webpack.dev.js",
-    "client": "webpack-dev-server --inline --hot --config webpack.dev.js",
+    "test3": "node app.js & webpack-dev-server --inline --hot --config webpack.dev.js",
+    "test": "webpack-dev-server --inline --hot --config webpack.dev.js",
     "server": "node app.js",
     "test2": "webpack --watch --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"

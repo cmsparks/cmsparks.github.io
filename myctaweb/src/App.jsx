@@ -4,10 +4,9 @@ import ReactDOM from 'react-dom'
 import Map from './pages/components/Map.jsx'
 import Nav from './pages/components/Nav.jsx'
 import styles from './index.css'
-import bus_stops from "../info/bus_stops.json"
-import train_stops from "../info/train_stops.json"
-const busIcon = require('./bus.png')
-const trainIcon = require('./train.png')
+import stops from "../info/stops.json"
+const busIcon = require('./bus.jpg')
+const trainIcon = require('./train.jpg')
 
 //var busData = JSON.parse(bus_stops);
 //var trainData = JSON.parse(train_stops);
@@ -21,49 +20,47 @@ const trainIcon = require('./train.png')
 );*/
 
 //console.log(sizedBus)
-var busMark = ""
-var trainMark = ""
-for (var i = 30000; i < 30500; i++) {
-	if(train_stops[i]!=undefined)
+/*var markerList = ""
+for (var i = 1; i < 47001; i++) {
+	if(stops[i]!=undefined)
 	{
-
-		//set up markers
-		trainMark=trainMark+'{"location": {'
-		trainMark=trainMark+'"lat": '+JSON.stringify(train_stops[i].latlng.latitude);
-	    trainMark=trainMark+', "lng": '+JSON.stringify(train_stops[i].latlng.longitude);
-	    trainMark=trainMark+'}, "icon": "'+trainIcon+'"},'
-	}
-}
-for (var i = 1; i < 18000; i++) {
-	if(bus_stops[i]!=undefined)
-	{
-		busMark=busMark+'{"location": {'
-		busMark=busMark+'"lat":'+JSON.stringify(bus_stops[i].latlng.latitude);
-	    busMark=busMark+', "lng":'+JSON.stringify(bus_stops[i].latlng.longitude);
-	    busMark=busMark+'}, "icon": "'+busIcon+'"}'
-	    if(i!=17967)
+		markerList=markerList+'{"location": {'
+		markerList=markerList+'"lat":'+JSON.stringify(stops[i].stop_lat);
+	    markerList=markerList+', "lng":'+JSON.stringify(stops[i].stop_lon);
+	    if(stops[i].location_type=0) {
+	    	markerList=markerList+'}, "icon": "'+busIcon+'"}'
+	    }
+	    else {
+	    	markerList=markerList+'}, "icon": "'+trainIcon+'"}'
+	    }
+	    if(i!=41700)
 	    {
-	    	busMark=busMark+","
+	    	markerList=markerList+","
 	    }
 	}
 }
-var allMark="["+trainMark+busMark+"]"
-var markJSON = JSON.parse(allMark)
+markerList="["+markerList+"]"
+var markJSON = JSON.parse(markerList)
 
-
+*/
 class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			route: 2
+		}
+	}
+	//setRoute(i) {
+
+	//}
 	render() {
-
-
-		const markers = markJSON
-
 		return (
 			<div className='wrapper'>
-				<Nav />
+				<Nav route={this.state.route} /*routeSetter={this.setRoute.bind(this, i)}*//>
 				<Map 
 					containerElement={<div className='containerElem'/>}
 					mapElement={<div className='mapElem'/>}
-					markers={ markers }
+					route={this.state.route}
 				/>
 			</div>
 		)
@@ -74,81 +71,3 @@ ReactDOM.render(
 	<App />,
 	document.getElementById('app')
 )
-
-
-
-
-
-/*
-
-import { busKey, trainKey } from 'mycta/keys'
-import { stringify } from 'querystring'
-import moment from 'moment'
-
-function formatTime (milliseconds) {
-  let seconds = Math.floor(milliseconds / 1000)
-  let result = ''
-
-  if (seconds >= 60) {
-    result += addUnit(Math.floor(seconds / 60), 'minute') + ' '
-    seconds -= 60 * Math.floor(seconds / 60)
-  }
-
-  if (seconds) {
-    result += addUnit(seconds, 'second')
-  }
-
-  return result
-}
-
-function addUnit (value, type) {
-  return value + ' ' + type + (value > 1 ? 's' : '')
-}
-
-function formatBusDateTime (dateTime) {
-  let list = dateTime.split('')
-  list.splice(4, 0, '-')
-  list.splice(7, 0, '-')
-  list.splice(10, 1, 'T')
-  return list.join('')
-}
-
-function getTimeDiff (dateTime) {
-  console.log(Date.parse(dateTime), Date.now(), moment(dateTime).toISOString(), moment().toISOString())
-  return moment(dateTime).diff(moment())
-}
-
-export function getPredictions (type, id, callback) {
-  if (type === 'train') {
-    trainRequest('ttarrivals', { stpid: id }, (data) => callback(
-      data.eta
-        .map(prediction => formatTime(getTimeDiff(prediction.arrT)))
-    ))
-  } else {
-    busRequest('getpredictions', { stpid: id }, (data) => callback(
-      data.error ? [data.error[0].msg] : data.prd
-        .map(prediction => formatTime(getTimeDiff(formatBusDateTime(prediction.prdtm))))
-    ))
-  }
-}
-
-function busRequest (type, parameters, callback) {
-  fetch(`http://ctabustracker.com/bustime/api/v2/${type}?` + stringify({
-    key: busKey,
-    format: 'json',
-    ...parameters
-  }))
-    .then((resp) => resp.json())
-    .then((data) => { console.log(data); callback(data['bustime-response']) })
-}
-
-function trainRequest (type, parameters, callback) {
-  fetch(`http://lapi.transitchicago.com/api/1.0/${type}.aspx?` + stringify({
-    key: trainKey,
-    outputType: 'JSON',
-    ...parameters
-  }))
-    .then((resp) => resp.json())
-    .then((data) => { console.log(data); callback(data.ctatt) })
-}
-*/

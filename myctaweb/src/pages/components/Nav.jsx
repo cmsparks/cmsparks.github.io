@@ -1,86 +1,125 @@
 import React from 'react'
 import bus_stops from "../../../info/bus_stops.json"
 import train_stops from "../../../info/train_stops.json"
-
-/*var busMark = ""
-var trainMark = ""
+import routes from "../../../info/routes.json"
+import train_lines from "../../../info/train_lines.json"
+import bus_lines from "../../../info/bus_lines.json"
+/*
+var panels = ""
 for (var i = 30000; i < 30500; i++) {
   if(train_stops[i]!=undefined)
   {
-    
-    //set up markers
-    trainMark=trainMark+'{"location": {'
-    trainMark=trainMark+'"lat": '+JSON.stringify(train_stops[i].latlng.latitude);
-      trainMark=trainMark+', "lng": '+JSON.stringify(train_stops[i].latlng.longitude);
-      trainMark=trainMark+'}, "icon": "'+trainIcon+'"},'
+    panels = 
+    train_stops[i].title
   }
 }
 for (var i = 1; i < 18000; i++) {
   if(bus_stops[i]!=undefined)
   {
-    busMark=busMark+'{"location": {'
-    busMark=busMark+'"lat":'+JSON.stringify(bus_stops[i].latlng.latitude);
-      busMark=busMark+', "lng":'+JSON.stringify(bus_stops[i].latlng.longitude);
-      busMark=busMark+'}, "icon": "'+busIcon+'"}'
-      if(i!=17967)
-      {
-        busMark=busMark+","
-      }
+    
   }
 }
-var allMark="["+trainMark+busMark+"]"
-var markJSON = JSON.parse(allMark)
+JSON.parse(panels)
 */
-
 class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.setFav = this.setFav.bind(this);
-    this.setAll = this.setAll.bind(this);
-    this.state = {isFav: false}
+    this.setRoutes = this.setRoutes.bind(this);
+    this.state = {routeSel: "all"}
   }
   setFav() {
     console.log("fav");
     this.setState({
-      isFav: true
+      routeSel: "fav"
     });
   }
-  setAll() {
+  setRoutes() {
     console.log("all");
     this.setState({
-      isFav: false
+      routeSel: "all"
     });
   }
+/*  setRoute(i) {
+    console.log(i)
+  }*/
   render () {
     return (
-            <div className="nav">
-        		<div className="tabWrap">
-        			<div className="favTab" onClick={this.setFav}><h2>Favorites</h2></div>
-        			<div className="allTab" onClick={this.setAll}><h2>All</h2></div>
-        		</div>
-                <InfoBoxes />
-        	</div>
+      <div className="nav">
+        <div className="tabWrap">
+          <div className="favTab" onClick={this.setFav}><h2>Favorites</h2></div>
+          <div className="allTab" onClick={this.setRoutes}><h2>Routes</h2></div>
+        </div>
+        <Boxes/>
+      </div>
     )
   }
 }
-class InfoBoxes extends React.Component {
-    render () {
-        return (
-            <div className="content">
-              <div className="contentGrad"></div>
-              <InfoBox line="84 Bus" stop="Catalpa" time1="3:02"/>
-              <InfoBox line="Brown Line" stop="Kimball" time1="3:03"/>
-              <InfoBox line="Blue Line" stop="Midway" time1="3:15"/>
-              <InfoBox line="92 Bus" stop="Montrose" time1="3:05"/>
-              <InfoBox line="Brown Line" stop="Montrose" time1="2:59"/>
-            </div>
-        )
+class Boxes extends React.Component {
+  constructor (props) {
+    super(props)
+    //this.handleClick = this.handleClick.bind(this,i)
+    this.state = {
+      onRoute: true,
+      routeSel: "",
+      typeSel: 0
     }
+  }
+  handleClick(i) {
+    console.log(i)
+    this.setState({routeSel: i,onRoute: false,typeSel: routes[i].route_type})
+  }
+  render () {
+    var infoBox = <div></div>
+    if(this.state.typeSel==3){
+      console.log(this.state.routeSel)
+      console.log("id"+routes[this.state.routeSel].route_id)
+      id=routes[this.state.routeSel].route_id
+      infoBox = bus_lines[id].map(function(bus_lines,i) {
+        console.log(bus_lines["111A"][1])
+        return(<InfoBox
+          key={i}
+          line={5}
+          stop={bus_stops[bus_lines[i]].name}
+          time1="3:00"/>)
+      }.bind(this))
+    }
+    else if (this.state.typeSel==1){ 
+      console.log("fdsjafdsj")
+    }
+    return (
+        <div className="content">
+          <div className="contentGrad"></div>
+          {this.state.onRoute && routes.map(function(allroutes, i) {
+            return (<RouteBox 
+              key={i}
+              route_id={i}
+              routeName={routes[i].route_long_name}
+              action={this.handleClick.bind(this, i)}
+            />)
+          }.bind(this))}
+          {!this.state.onRoute && infoBox}
+        </div>
+    )
+  }
 }
 
+class RouteBox extends React.Component {
+  render () {
+    return (
+      <div className="routeBox">
+        <h4>{this.props.routeName} {this.props.type} </h4>
+        <div className="routeSel" onClick={this.props.action}>-></div>
+      </div>
+    )
+  }
+}
 class InfoBox extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      prediction: "0"
+    }
   }
   render() {
     return (

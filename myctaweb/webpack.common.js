@@ -50,7 +50,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|otf|svg)$/,
+        test: /\.(png|jpg|woff|woff2|eot|ttf|otf|svg)$/,
         include: APP_DIR,
         loader: 'url-loader',
         options: {

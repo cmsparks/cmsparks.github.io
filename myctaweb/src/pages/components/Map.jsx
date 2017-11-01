@@ -4,10 +4,13 @@ import { withGoogleMap, GoogleMap, Marker, InfoWindow, KmlLayer } from 'react-go
 class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      route: 0
+    }
   }
   
   render () {
-    const markers = this.props.markers.map((stopLoc, i) => {
+    /*const markers = this.props.markers.map((stopLoc, i) => {
       const marker = {
         position: {
           lat: stopLoc.location.lat,
@@ -20,7 +23,7 @@ class Map extends React.Component {
         <Marker key={i} {...marker}>
         </Marker>
       )
-    })
+    })*/
     return (
     	
       	<GoogleMap
@@ -35,8 +38,6 @@ class Map extends React.Component {
       url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
       options={{ preserveViewport: true }}
     />
-          <KmlLayer url='./doc.kml' options={{ preserveViewport: true }} />
-          { markers }
       	</GoogleMap>
     )
   }

@@ -1,0 +1,18 @@
+body {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 0;
+	grid-template-areas: 
+	"title title"
+	"projects experience"
+}
+
+.title {
+	grid-area: title;
+}
+.projects {
+	grid-area: projects;
+}
+.experience {
+	grid-area: experience;
+}

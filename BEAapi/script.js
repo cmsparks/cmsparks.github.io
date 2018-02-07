@@ -1,6 +1,9 @@
 let chart;
 
+let populationAdjust = false;
+
 populateSelect();
+let populationData = buildPopulation();
 
 initJson = getRegionalGDP(1);
 
@@ -34,6 +37,14 @@ function redrawMap(dataArray) {
     region:"US"
   };
   chart.draw(data, options);
+}
+
+function handleCheck(){
+  populationAdjust = !populationAdjust
+  let selected = document.getElementById("selection").value;
+  json = getRegionalGDP(selected);
+  dataIndustries = buildData(json);
+  redrawMap(dataIndustries);
 }
 
 function handleSelect() {
@@ -89,9 +100,38 @@ function getRegionalGDP(IndustryId) {
 function buildData(json) {
   let dataArray = [['State', 'GDP']];
 
-  console.log(json.BEAAPI.Results.Data.length)
+  console.log(json.BEAAPI.Results.Data.length);
   for(let i = 1; i < 52; i++) {
-      dataArray.push([json.BEAAPI.Results.Data[i].GeoName,Number(json.BEAAPI.Results.Data[i].DataValue)])
+    let gdpNum = Number(json.BEAAPI.Results.Data[i].DataValue);
+    if(populationAdjust){
+      pop = getPopulation(json.BEAAPI.Results.Data[i].GeoName);
+      gdpNum = ((gdpNum)/(pop/100000));
+      if(pop===-1) {
+        console.log("pop adjust failed");
+      }
+    }
+    dataArray.push([json.BEAAPI.Results.Data[i].GeoName,gdpNum]);
   }
   return dataArray;
+}
+
+function buildPopulation() {
+  let jsonString;
+  function reqListener () {
+    jsonString = this.responseText;
+  }
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", "https://api.census.gov/data/2016/pep/population?get=POP,GEONAME&for=state&DATE=9&key=befc215b63c25d4d8990c9e598b73d32954e7a56", false);
+  oReq.send();
+  return JSON.parse(jsonString);
+}
+
+function getPopulation(name) {
+  for(let i = 1; i < populationData.length; i++) {
+    if(populationData[i][1] === name) {
+      return populationData[i][0];
+    }
+  }
+  return "-1"
 }

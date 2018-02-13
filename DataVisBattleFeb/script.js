@@ -1,12 +1,10 @@
 let chart;
-
-let year = 1995
+let year = 1995;
+let animate = true;
 
 dataJson = JSON.parse(data);
 
 let initData = getData(year)
-
-let animate = true;
 
 google.charts.load('current', {
   'packages':['geochart'],
@@ -17,17 +15,22 @@ google.charts.setOnLoadCallback(initMap);
 
 //animation interval
 setInterval(() => {
-    if(year===2015) {
-      year=1994
-    }
-    else {
-      year = Number(year)+1;
-    }
+    let percData = getPercentage(year);
     if(animate===true) {
+      if(year===2015) {
+        year=1994
+      }
+      else {
+        year = Number(year)+1;
+      }
       redrawMap(getData(year));
       document.getElementById("selection").value = year;
       document.getElementById("selectedYear").innerHTML = year;
     }
+    document.getElementById("NLPerc").innerHTML = "<p>"+(percData[0]/.5)+"%</p>"
+    document.getElementById("SBPerc").innerHTML = "<p>"+(percData[1]/.5)+"%</p>"
+    document.getElementById("CBPerc").innerHTML = "<p>"+(percData[2]/.5)+"%</p>"
+    document.getElementById("LPerc").innerHTML = "<p>"+(percData[3]/.5)+"%</p>"
 }, 750);
 
 // takes initialization data and draws the map initially
@@ -89,6 +92,27 @@ function getData(year) {
     }
   }
   return data;
+}
+
+function getPercentage(year) {
+  let data = getData(year);
+  let returnData = [0,0,0,0]
+  for(let i = 0; i < data.length; i++) {
+    if(data[i][1] === 1) {
+      returnData[0] = returnData[0]+1
+    }
+    else if(data[i][1] === 2) {
+      returnData[1] = returnData[1]+1
+    }
+    else if(data[i][1] === 3) {
+      returnData[2] = returnData[2]+1
+    }
+    else {
+      returnData[3] = returnData[3]+1
+    }
+  }
+  console.log(returnData);
+  return returnData;
 }
 
 //handles changes in the input range

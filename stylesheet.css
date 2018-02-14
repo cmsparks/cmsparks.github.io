@@ -1,18 +1,41 @@
 body {
+	padding: 100px;
+	padding-top: 60px;
 	display: grid;
+	grid-column-gap: 50px;
 	grid-template-columns: 1fr 1fr;
-	grid-gap: 0;
 	grid-template-areas: 
 	"title title"
-	"projects experience"
+	"projects experience";
+	font-family: helvetica;
 }
 
 .title {
 	grid-area: title;
+	margin-bottom:20px;
+	margin-left: 50px;
 }
 .projects {
 	grid-area: projects;
+	display: grid;
+	grid-template-areas: "past" "current";
+	grid-gap: 50px;
 }
 .experience {
 	grid-area: experience;
+	padding: 30px;
+	box-shadow:0px 1px 5px 1px #333;
+	border-radius: 10px;
+}
+.past {
+	grid-area: past;
+	padding: 30px;
+	box-shadow:0px 1px 5px 1px #333;
+	border-radius: 10px;
+}
+.current {
+	grid-area: current;
+	padding: 30px;
+	box-shadow:0px 1px 5px 1px #333;
+	border-radius: 10px;
 }

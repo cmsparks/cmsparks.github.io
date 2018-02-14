@@ -2,11 +2,12 @@ body {
 	padding: 100px;
 	padding-top: 60px;
 	display: grid;
-	grid-column-gap: 50px;
+	grid-gap: 50px;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas: 
 	"title title"
-	"projects experience";
+	"past experience"
+	"current nul";
 	font-family: helvetica;
 }
 
@@ -14,12 +15,6 @@ body {
 	grid-area: title;
 	margin-bottom:20px;
 	margin-left: 50px;
-}
-.projects {
-	grid-area: projects;
-	display: grid;
-	grid-template-areas: "past" "current";
-	grid-gap: 50px;
 }
 .experience {
 	grid-area: experience;

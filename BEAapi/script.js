@@ -1,3 +1,6 @@
+//TODO: clean this code up to be more presentable and make better
+// error handling for years without data from the BEA.
+
 let chart;
 
 let populationAdjust = document.getElementById("check").checked;;

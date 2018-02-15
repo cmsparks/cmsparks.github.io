@@ -1,3 +1,5 @@
+//TODO: clean this code up to be more presentable and condense it.
+
 let chart;
 let year = 1995;
 let animate = true;

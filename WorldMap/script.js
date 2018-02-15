@@ -1,4 +1,8 @@
 //uses https://github.com/johan/world.geo.json as the json file
+//TODO implement usage of the UN Comtrade API and also clean up
+//the map so that it is not quite as cluttered.
+
+
 var map;
 let selected;
 let currentPolys = [];

@@ -1,6 +1,6 @@
 let chart;
 
-let populationAdjust = false;
+let populationAdjust = document.getElementById("check").checked;;
 
 populateSelect();
 let populationData = buildPopulation();
@@ -8,6 +8,12 @@ let populationData = buildPopulation();
 initJson = getRegionalGDP(1);
 
 initData = buildData(initJson);
+
+let initDataUS = initData[1];
+initData.splice(1,1);
+initData.splice(9,1);
+
+document.getElementById("total").innerHTML = Math.floor(initDataUS[1]+0.5);
 
 google.charts.load('current', {
   'packages':['geochart'],
@@ -40,10 +46,14 @@ function redrawMap(dataArray) {
 }
 
 function handleCheck(){
-  populationAdjust = !populationAdjust
+  populationAdjust = document.getElementById("check").checked;
   let selected = document.getElementById("selection").value;
   json = getRegionalGDP(selected);
   dataIndustries = buildData(json);
+  let dataUS = dataIndustries[1];
+  dataIndustries.splice(1,1);
+  dataIndustries.splice(9,1);
+  document.getElementById("total").innerHTML = Math.floor(dataUS[1]+0.5);
   redrawMap(dataIndustries);
 }
 
@@ -51,6 +61,10 @@ function handleSelect() {
   let selected = document.getElementById("selection").value;
   json = getRegionalGDP(selected);
   dataIndustries = buildData(json);
+  let dataUS = dataIndustries[1];
+  dataIndustries.splice(1,1);
+  dataIndustries.splice(9,1);
+  document.getElementById("total").innerHTML = Math.floor(dataUS[1]+0.5);
   redrawMap(dataIndustries);
 }
 
@@ -98,15 +112,19 @@ function getRegionalGDP(IndustryId) {
 }
 
 function buildData(json) {
-  let dataArray = [['State', 'GDP']];
+  let gdpstr = "GDP (in millions of $)"
+  if(populationAdjust) {
+    gdpstr = "GDP (millions dollarss per capita)";
+  }
+  let dataArray = [['State', gdpstr]];
 
   console.log(json.BEAAPI.Results.Data.length);
-  for(let i = 1; i < 52; i++) {
+  for(let i = 0; i < 52; i++) {
     let gdpNum = Number(json.BEAAPI.Results.Data[i].DataValue);
     if(populationAdjust){
-      pop = getPopulation(json.BEAAPI.Results.Data[i].GeoName);
-      gdpNum = ((gdpNum)/(pop/100000));
-      if(pop===-1) {
+      pop = ((json.BEAAPI.Results.Data[i].GeoName === "United States") ? 325910220 : getPopulation(json.BEAAPI.Results.Data[i].GeoName));
+      gdpNum = ((gdpNum*1000000)/(pop))
+      if(pop=== -1) {
         console.log("pop adjust failed");
       }
     }

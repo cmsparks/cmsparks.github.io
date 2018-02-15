@@ -1,0 +1,42 @@
+* {
+	transition: all .25s ease-in-out;
+	font-family: helvetica;
+}
+
+body {
+	display: grid;
+	grid-template-columns: 2.5fr 1fr;
+	grid-template-areas: 
+	"header header"
+	"map sidebar";
+}
+
+#overlay > h2 {
+	color: red;
+	display: none;
+}
+
+header {
+	grid-area: header;
+}
+
+.sidebar {
+	grid-area: sidebar;
+	margin-top: 175px;
+	padding: 30px;
+	margin-bottom: 175px;
+	box-shadow:0px 1px 5px 1px #333;
+	border-radius: 10px;
+}
+
+
+.sidebar > #selectContainer {
+	margin-top: 50px;
+}
+.sidebar > .checkContainer {
+	margin-top: 50px;
+}
+
+#regions_div {
+	grid-area: map;
+}

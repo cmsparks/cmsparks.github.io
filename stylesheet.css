@@ -7,7 +7,6 @@ body {
 	"writeups"
 	"footer";
 }
-
 /*header*/
 .header {
 	grid-area: header;
@@ -28,12 +27,12 @@ body {
 .writeups {
 	grid-area: writeups;
 	margin: 0 auto;
-	width: 80vw;
+	width: 75vw;
 	display: grid;
 	grid-gap: 60px;
 	padding-bottom: 50px;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: 300px 300px 300px;
+	grid-template-rows: 33% 33% 33%;
 	grid-template-areas: 
 	"wua wua wua wua wud wud"
 	"wuf wuf wuf wub wub wub"
@@ -66,10 +65,14 @@ body {
 }
 #wuc {
 	grid-area: wuc;
+	background-image: url('img/mars.png');
+	background-size: cover;
 }
 #wuc > .title {
+	padding-top: 30px;
 }
 #wuc > .subtitle {
+	color: #eee;
 }
 #wud {
 	grid-area: wud;
@@ -81,7 +84,7 @@ body {
 }
 #wud > .subtitle {
 	text-align: right;
-	color: #ddd;
+	color: #efefef;
 }
 #wue {
 	grid-area: wue;
@@ -97,6 +100,8 @@ body {
 }
 #wuf {
 	grid-area: wuf;
+	background-image: url('img/pain.png');
+	background-size:cover;
 }
 #wuf > .title {
 	color:#333;
@@ -104,6 +109,7 @@ body {
 #wuf > .subtitle {
 	color: grey;
 	padding-top: 195px;
+	text-align: right;
 }
 .writeup {
 	overflow: hidden;
@@ -115,65 +121,22 @@ body {
 	box-shadow: 0px 1.5px 3px .25px #888;
 	transition: .1s;
 }
-
 .writeup:hover {
 	transform: translateY(-2px);
 }
 .writeup:active {
 	transform: translateY(1px);
 }
-
 .title {
 	padding: 0 15px;
 	color: white;
 	z-index: 10;
-	font-size: 16pt;
+	font-size: 14pt;
 }
 .subtitle {
 	padding: 0 15px;
 	color: lightgrey;
 	z-index: 10;
-	font-size: 12pt;
+	font-size: 11pt;
+	font-weight: 700;
 }
-
-/*body {
-	padding: 100px;
-	padding-top: 60px;
-	display: grid;
-	grid-gap: 50px;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas: 
-	"title title"
-	"past experience"
-	"current nul";
-	font-family: helvetica;
-}
-
-.title {
-	grid-area: title;
-	margin-bottom:20px;
-	margin-left: 50px;
-}
-.experience {
-	grid-area: experience;
-	padding: 30px;
-	box-shadow:0px 1px 5px 1px #333;
-	border-radius: 10px;
-}
-.past {
-	grid-area: past;
-	padding: 30px;
-	box-shadow:0px 1px 5px 1px #333;
-	border-radius: 10px;
-}
-.current {
-	grid-area: current;
-	padding: 30px;
-	box-shadow:0px 1px 5px 1px #333;
-	border-radius: 10px;
-}
-.contact {
-	padding: 30px;
-	box-shadow:0px 1px 5px 1px #333;
-	border-radius: 10px;
-}*/

@@ -1,3 +1,5 @@
+/*TODO: make a few media queries*/
+
 body {
 	font-family: helvetica;
 	display: grid;
@@ -27,12 +29,12 @@ body {
 .writeups {
 	grid-area: writeups;
 	margin: 0 auto;
-	width: 75vw;
+	width: 80vw;
 	display: grid;
 	grid-gap: 60px;
 	padding-bottom: 50px;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: 33% 33% 33%;
+	grid-template-rows: 300px 300px 300px;
 	grid-template-areas: 
 	"wua wua wua wua wud wud"
 	"wuf wuf wuf wub wub wub"
@@ -41,7 +43,7 @@ body {
 
 #wua {
 	grid-area: wua;
-	background-image: url('img/stars.gif');
+	background-image: url('img/stars.png');
 	background-size: cover;
 }
 #wua > .title {
@@ -67,6 +69,7 @@ body {
 	grid-area: wuc;
 	background-image: url('img/mars.png');
 	background-size: cover;
+	background-position: middle;
 }
 #wuc > .title {
 	padding-top: 30px;
@@ -104,10 +107,10 @@ body {
 	background-size:cover;
 }
 #wuf > .title {
-	color:#333;
+	color:white;
 }
 #wuf > .subtitle {
-	color: grey;
+	color: white;
 	padding-top: 195px;
 	text-align: right;
 }

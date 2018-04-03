@@ -1,0 +1,64 @@
+body {
+
+}
+
+.content {
+	position: fixed;
+	width: 50%;
+	height: 100%;
+	right: 0;
+	top: 0;
+	overflow-y: scroll;
+	box-shadow: 0 0 5px 1px #888;
+	background-color: #fffff8;
+}
+
+.images {
+	position: fixed;
+	width: 50%;
+	left: 0;
+	top: 0;
+	width: 50%;
+	height: 100%;
+	overflow: scroll;
+	background-image: url('img/stars.png');
+	background-size: cover;
+	background-position: center;
+}
+
+h1 {
+	font-size: 32pt;
+	border-bottom: 3px solid #000;
+	margin: 75px 75px 0px 75px;
+	font-family: 'Playfair Display', serif;
+
+}
+
+h2 {
+	font-size: 16pt;
+	font-style: italic;
+	font-weight: 400;
+	margin: 25px 75px 0px 75px;
+	font-family: 'Playfair Display', serif;
+}
+
+h3 {
+	font-size: 16pt;
+	font-weight: 500;
+	margin: 55px 75px 20px 75px;
+	font-family: 'Playfair Display', serif;
+}
+
+h5 {
+	font-weight: 500;
+	margin: 20px 75px 35px 75px;
+	font-family: 'Raleway', 'helvetica', sans-serif;
+}
+
+p {
+	font-size: 12.5pt;
+	line-height: 18pt;
+	margin: 0px 75px 50px 75px;
+	font-family: 'Raleway', 'helvetica', sans-serif;
+	text-indent: 40px;
+}

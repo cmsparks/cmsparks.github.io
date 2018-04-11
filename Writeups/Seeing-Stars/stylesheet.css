@@ -62,3 +62,23 @@ p {
 	font-family: 'Raleway', 'helvetica', sans-serif;
 	text-indent: 40px;
 }
+
+pre {
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	font-size: 12pt;
+	line-height: 16pt;
+	margin: 0px 85px 50px 85px;
+	border-left: 5px solid #dddd99;
+	background-color: #ffffdd;
+	font-family: 'Source Code Pro', monospace;
+	text-align: left;
+}
+
+.csvimg {
+	width: 95%;
+	margin: 0 2.5%;
+	margin-top: 18%;
+}

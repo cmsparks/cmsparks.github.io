@@ -37,7 +37,7 @@ body {
 	grid-template-rows: 300px 300px 300px;
 	grid-template-areas: 
 	"wua wua wua wua wud wud"
-	"wuf wuf wuf wub wub wub"
+	"wub wub wub wuf wuf wuf"
 	"wue wue wuc wuc wuc wuc";
 }
 
@@ -107,10 +107,10 @@ body {
 	background-size:cover;
 }
 #wuf > .title {
-	color:white;
+	color:black;
 }
 #wuf > .subtitle {
-	color: white;
+	color: #555;
 	padding-top: 195px;
 	text-align: right;
 }
